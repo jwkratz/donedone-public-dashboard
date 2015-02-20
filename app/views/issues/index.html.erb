@@ -1,5 +1,14 @@
 <h1>Issues</h1>
 
 <% @issues.each do |issue| %>
-  <p><%= issue.title %></p>
+  <p>
+    Title: <%= issue.title %><br />
+    Project: <%= issue.project.name %><br />
+    Creator: <%= issue.creator.name %><br />
+    Fixer: <%= issue.fixer.name %><br />
+    Tester: <%= issue.tester.name %><br />
+    Last Updater: <%= issue.last_updater.name %><br />
+    Status: <%= issue.status.name %><br />
+    Priority: <%= issue.priority.name %><br />
+  </p>
 <% end %>
