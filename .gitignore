@@ -14,3 +14,4 @@
 
 # Ignore secrets
 config/secrets.yml
+config/initializers/donedone_api.rb

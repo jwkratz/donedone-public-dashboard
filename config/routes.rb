@@ -1,9 +1,15 @@
 Rails.application.routes.draw do
 
+  get 'sync/index'
+
+  get 'sync_controller/index'
+
   root 'projects#index'
   resources :projects, only: :show
 
   resources :issues, only: [:index, :show]
+
+  resources :sync, only: [:index]
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
