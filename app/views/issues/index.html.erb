@@ -15,7 +15,7 @@
       <% @issues_active.each do |issue| %>
         <tr>
           <td><%= issue.project.title %></td>
-          <td><strong>#<%= issue.order_number %>: <%= issue.title %></strong></td>
+          <td><strong><%= link_to '#' + issue.order_number.to_s + ': ' + issue.title, issue %></strong></td>
           <td><%= issue.status %></td>
           <td><span class="label label-<%= issue.priority.downcase %>"><%= issue.priority %></span></td>
           <td><%= issue.tester %></td>
@@ -43,7 +43,7 @@
       <% @issues_inactive.each do |issue| %>
         <tr>
           <td><%= issue.project.title %></td>
-          <td><strong>#<%= issue.order_number %>: <%= issue.title %></strong></td>
+          <td><strong><%= link_to '#' + issue.order_number.to_s + ': ' + issue.title, issue %></strong></td>
           <td><%= issue.status %></td>
           <td><span class="label label-<%= issue.priority.downcase %>"><%= issue.priority %></span></td>
           <td><%= issue.tester %></td>

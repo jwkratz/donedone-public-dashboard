@@ -1,2 +1,7 @@
-<h1>Issues#show</h1>
-<p>Find me in app/views/issues/show.html.erb</p>
+<ul class="list-inline">
+  <li>#<%= @issue.order_number %></li>
+  <li><span class="label label-<%= @issue.priority.downcase %>"><%= @issue.priority %></span></li>
+  <li><%= @issue.status %></li>
+  <li><%= @issue.project.title %></li>
+</ul>
+<h1><%= @issue.title %></h1>
