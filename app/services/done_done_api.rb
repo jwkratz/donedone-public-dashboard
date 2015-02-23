@@ -18,4 +18,32 @@ class DoneDoneApi
     end
   end
 
+  def self.sync_issues
+    issues_response = conn.get '/issuetracker/api/v2/issues/all.json'
+
+    if issues_response.body
+      api_issues = JSON.parse(issues_response.body)['issues']
+      api_issues.each do |api_issue|
+
+        project_id = api_issue['project']['id']
+        order_number = api_issue['order_number']
+
+        p = Project.find_by(project_id: project_id)
+
+        issue_response = conn.get "/issuetracker/api/v2/projects/#{project_id}/issues/#{order_number}.json"
+        if issue_response.body
+          api_issue_detail = JSON.parse(issue_response.body)
+          i = Issue.find_or_initialize_by(order_number: api_issue_detail['order_number'])
+          i.title = api_issue_detail['title']
+          i.project = p
+          # i.description = api_issue_detail['description']
+
+          i.save
+        end
+
+      end
+    end
+
+  end
+
 end
