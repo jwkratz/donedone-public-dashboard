@@ -33,14 +33,21 @@ class DoneDoneApi
         issue_response = conn.get "/issuetracker/api/v2/projects/#{project_id}/issues/#{order_number}.json"
         if issue_response.body
           api_issue_detail = JSON.parse(issue_response.body)
-          i = Issue.find_or_initialize_by(order_number: api_issue_detail['order_number'])
+
+          i = Issue.find_or_initialize_by(project: p, order_number: api_issue_detail['order_number'])
           i.title = api_issue_detail['title']
-          i.project = p
+          i.description = api_issue_detail['description']
           i.status = api_issue_detail['status']['name']
           i.priority = api_issue_detail['priority']['name']
           i.fixer = api_issue_detail['fixer']['name']
           i.tester = api_issue_detail['tester']['name']
-          # i.description = api_issue_detail['description']
+          i.created_on = convert_to_datetime(api_issue['created_on'])
+          i.last_updated_on = convert_to_datetime(api_issue['last_updated_on'])
+          i.last_updater = api_issue['last_updater']['name']
+
+          if api_issue_detail['due_date']
+            i.due_date = convert_to_date(api_issue_detail['due_date'])
+          end
 
           i.save
         end
@@ -49,5 +56,17 @@ class DoneDoneApi
     end
 
   end
+
+  private
+
+    def self.convert_to_date(raw_val)
+      num = raw_val.gsub(/[^0-9]/, '').to_f
+      Time.at(num / 1000).to_date
+    end
+
+    def self.convert_to_datetime(raw_val)
+      num = raw_val.gsub(/[^0-9]/, '').to_f
+      Time.at(num / 1000).to_datetime
+    end
 
 end
