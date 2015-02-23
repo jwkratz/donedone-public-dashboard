@@ -53,3 +53,7 @@
     </tbody>
   </table>
 <% end %>
+
+<% if !@issues_active.any? && !@issues_inactive.any? %>
+  <div class="alert alert-danger" role="alert">Could not find any active or inactive issues.</div>
+<% end %>
