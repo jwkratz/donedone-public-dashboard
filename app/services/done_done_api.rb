@@ -36,6 +36,10 @@ class DoneDoneApi
           i = Issue.find_or_initialize_by(order_number: api_issue_detail['order_number'])
           i.title = api_issue_detail['title']
           i.project = p
+          i.status = api_issue_detail['status']['name']
+          i.priority = api_issue_detail['priority']['name']
+          i.fixer = api_issue_detail['fixer']['name']
+          i.tester = api_issue_detail['tester']['name']
           # i.description = api_issue_detail['description']
 
           i.save

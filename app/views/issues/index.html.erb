@@ -1,14 +1,55 @@
-<h1>Issues</h1>
+<% if @issues_active.any? %>
+  <h2>Active Issues</h2>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Project</th>
+        <th>Title</th>
+        <th>Status</th>
+        <th>Priority</th>
+        <th>Fixer</th>
+        <th>Tester</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @issues_active.each do |issue| %>
+        <tr>
+          <td><%= issue.project.title %></td>
+          <td><strong>#<%= issue.order_number %>: <%= issue.title %></strong></td>
+          <td><%= issue.status %></td>
+          <td><span class="label label-<%= issue.priority.downcase %>"><%= issue.priority %></span></td>
+          <td><%= issue.tester %></td>
+          <td><%= issue.fixer %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
 
-<% @issues.each do |issue| %>
-  <p>
-    Title: <%= issue.title %><br />
-    Project: <%= issue.project.name %><br />
-    Creator: <%= issue.creator.name %><br />
-    Fixer: <%= issue.fixer.name %><br />
-    Tester: <%= issue.tester.name %><br />
-    Last Updater: <%= issue.last_updater.name %><br />
-    Status: <%= issue.status.name %><br />
-    Priority: <%= issue.priority.name %><br />
-  </p>
+<% if @issues_inactive.any? %>
+  <h2>Inactive Issues</h2>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Project</th>
+        <th>Title</th>
+        <th>Status</th>
+        <th>Priority</th>
+        <th>Fixer</th>
+        <th>Tester</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @issues_inactive.each do |issue| %>
+        <tr>
+          <td><%= issue.project.title %></td>
+          <td><strong>#<%= issue.order_number %>: <%= issue.title %></strong></td>
+          <td><%= issue.status %></td>
+          <td><span class="label label-<%= issue.priority.downcase %>"><%= issue.priority %></span></td>
+          <td><%= issue.tester %></td>
+          <td><%= issue.fixer %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 <% end %>

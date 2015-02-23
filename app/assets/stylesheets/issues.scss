@@ -1,3 +1,19 @@
 // Place all the styles related to the issues controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.label-low {
+  background: #6da79b;
+}
+
+.label-medium {
+  background: #f39f09;
+}
+
+.label-high {
+  background: #f26f21;
+}
+
+.label-critical {
+  background: #952715;
+}

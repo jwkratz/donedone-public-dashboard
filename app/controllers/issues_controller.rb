@@ -1,6 +1,7 @@
 class IssuesController < ApplicationController
   def index
-    @issues = Issue.all
+    @issues_active = Issue.active.all
+    @issues_inactive = Issue.inactive.all
   end
 
   def show
