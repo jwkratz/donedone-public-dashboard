@@ -1,13 +1,8 @@
 Rails.application.routes.draw do
 
-  get 'sync/index'
+  root 'issues#index'
 
-  get 'sync_controller/index'
-
-  root 'projects#index'
-  resources :projects, only: :show
-
-  resources :issues, only: [:index, :show]
+  resources :issues, only: [:show]
 
   resources :sync, only: [:index]
 
