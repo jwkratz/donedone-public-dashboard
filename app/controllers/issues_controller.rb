@@ -6,5 +6,6 @@ class IssuesController < ApplicationController
 
   def show
     @issue = Issue.find(params[:id])
+    @histories = @issue.issue_histories.order(:created_on)
   end
 end

@@ -1,7 +1,65 @@
-<ul class="list-inline">
-  <li>#<%= @issue.order_number %></li>
-  <li><span class="label label-<%= @issue.priority.downcase %>"><%= @issue.priority %></span></li>
-  <li><%= @issue.status %></li>
-  <li><%= @issue.project.title %></li>
-</ul>
-<h1><%= @issue.title %></h1>
+<div class="row issue-detail">
+
+  <div class="col-md-8">
+
+    <ul class="list-inline">
+      <li>#<%= @issue.order_number %></li>
+      <li><span class="label label-<%= @issue.priority.downcase %>"><%= @issue.priority %></span></li>
+      <li><%= @issue.status %></li>
+      <% if @issue.due_date %>
+        <li>Due <%= @issue.due_date %></li>
+      <% end %>
+    </ul>
+    <h1><%= @issue.title %></h1>
+
+    <hr />
+
+    <p><%= @issue.description.html_safe %></p>
+
+    <hr />
+
+    <% @histories.each do |h| %>
+
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h6><%= h.created_on %></h6>
+          <h4><%= h.action %></h4>
+        </div>
+        <div class="panel-body">
+          <%= h.description.html_safe %>
+        </div>
+      </div>
+
+    <% end %>
+
+  </div>
+
+  <div class="col-md-4">
+    <table class="table">
+      <tbody>
+        <tr>
+          <th>Project</th>
+          <td><%= @issue.project.title %></td>
+        </tr>
+        <tr>
+          <th>Fixer</th>
+          <td><%= short_name(@issue.fixer) %></td>
+        </tr>
+        <tr>
+          <th>Tester</th>
+          <td><%= short_name(@issue.tester) %></td>
+        </tr>
+        <tr>
+          <th>Created</th>
+          <td><%= @issue.created_on %><br />by <%= short_name(@issue.creator) %></td>
+        </tr>
+        <tr>
+          <th>Last Updated</th>
+          <td><%= @issue.last_updated_on %><br />by <%= short_name(@issue.last_updater) %></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+

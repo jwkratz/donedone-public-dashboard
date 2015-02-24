@@ -18,8 +18,8 @@
           <td><span class="label label-<%= issue.priority.downcase %>"><%= issue.priority %></span></td>
           <td><strong><%= link_to '#' + issue.order_number.to_s + ': ' + issue.title, issue %></strong></td>
           <td><%= issue.status %></td>
-          <td><%= issue.tester %></td>
-          <td><%= issue.fixer %></td>
+          <td><%= short_name(issue.tester) %></td>
+          <td><%= short_name(issue.fixer) %></td>
         </tr>
       <% end %>
     </tbody>
@@ -46,8 +46,8 @@
           <td><span class="label label-<%= issue.priority.downcase %>"><%= issue.priority %></span></td>
           <td><strong><%= link_to '#' + issue.order_number.to_s + ': ' + issue.title, issue %></strong></td>
           <td><%= issue.status %></td>
-          <td><%= issue.tester %></td>
-          <td><%= issue.fixer %></td>
+          <td><%= short_name(issue.tester) %></td>
+          <td><%= short_name(issue.fixer) %></td>
         </tr>
       <% end %>
     </tbody>

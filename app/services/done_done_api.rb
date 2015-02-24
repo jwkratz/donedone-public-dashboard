@@ -51,6 +51,7 @@ class DoneDoneApi
         i.priority = api_issue_detail['priority']['name']
         i.fixer = api_issue_detail['fixer']['name']
         i.tester = api_issue_detail['tester']['name']
+        i.creator = api_issue_detail['creator']['name']
         i.created_on = created_on
         i.last_updated_on = last_updated_on
         i.last_updater = last_updater
